@@ -14,6 +14,13 @@ component {
 			mapData.zoom = args.savedData[ args.zoomField ];
 		}
 
+		mapData.errors = {
+			  title       = translateResource( "formcontrols.mapPicker:postcode.error.title" )
+			, notSupplied = translateResource( "formcontrols.mapPicker:postcode.error.not.supplied" )
+			, notFound    = translateResource( "formcontrols.mapPicker:postcode.error.not.found" )
+			, unexpected  = translateResource( "formcontrols.mapPicker:postcode.error.unexpected" )
+		};
+
 		event.includeData( { mapData=mapData } )
 			.include( "/js/admin/mapPicker/" );
 

@@ -19,6 +19,7 @@
 			  , defaultLatitude   = cfrequest.mapData.defaultLatitude
 			  , defaultLongitude  = cfrequest.mapData.defaultLongitude
 			  , defaultZoom       = cfrequest.mapData.defaultZoom
+			  , errorMessages     = cfrequest.mapData.errors
 			  , latitude          = parseFloat( $latitudeField.val() )
 			  , longitude         = parseFloat( $longitudeField.val() )
 			  , hasInitLatLng     = $.isNumeric( latitude ) && $.isNumeric( longitude )
@@ -82,7 +83,7 @@
 				} else if ( lookupResult.error ) {
 					$.gritter.options.position = alertPosition;
 					$.gritter.add( {
-						  title      : "Postcode lookup error"
+						  title      : errorMessages.title
 						, text       : lookupResult.error
 						, class_name : "gritter-error preside-frontend-msgbox"
 						, sticky     : false
@@ -92,7 +93,7 @@
 			lookupPostcode = function( postcode ) {
 				var lookupResult = { success: false, error: "", latlng: [] };
 				if ( !postcode.length ) {
-					lookupResult.error = "Please supply a postcode!";
+					lookupResult.error = errorMessages.notSupplied;
 					processLookupPostcode( lookupResult );
 					return;
 				}
@@ -106,10 +107,10 @@
 						lookupResult.success = true;
 						lookupResult.latlng  = [ data.result[ 0 ].latitude, data.result[ 0 ].longitude ];
 					} else {
-						lookupResult.error = "Unable to locate the supplied postcode";
+						lookupResult.error = errorMessages.notFound;
 					}
 				} ).fail( function( jqXHR, textStatus, errorThrown ) {
-					lookupResult.error = "Unexpected response received from postcodes.io";
+					lookupResult.error = errorMessages.unexpected;
 				} ).always( function() {
 					processLookupPostcode( lookupResult );
 				} );

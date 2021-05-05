@@ -8,7 +8,7 @@
 			<field sortorder="10" name="defaultLatitude" />
 			<field sortorder="20" name="defaultLongitude" />
 			<field sortorder="30" name="defaultZoom" type="numeric" dbtype="int" />
-			<field sortorder="40" name="locationPicker" label="Locate on map" control="mapPicker" latitudeField="defaultLatitude" longitudeField="defaultLongitude" zoomField="defaultZoom" />
+			<field sortorder="40" name="locationPicker" control="mapPicker" latitudeField="defaultLatitude" longitudeField="defaultLongitude" zoomField="defaultZoom" />
 		</fieldset>
 	</tab>
 </form>
