@@ -59,10 +59,10 @@ echo "Push zip file to downloads..."
 curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"${ZIP_FILE}" || exit 1
 echo "Done."
 
-# echo "Publish to Forgebox..."
-# cd ../$BUILD_DIR
-# box forgebox login $FORGEBOX_USERNAME $FORGEBOX_PASSWORD || exit 1
-# box publish || exit 1
-# echo "Done."
+echo "Publish to Forgebox..."
+cd ../$BUILD_DIR
+box forgebox login $FORGEBOX_USERNAME $FORGEBOX_PASSWORD || exit 1
+box publish || exit 1
+echo "Done."
 
 echo "BUILD COMPLETE!"
