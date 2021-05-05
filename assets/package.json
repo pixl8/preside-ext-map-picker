@@ -1,0 +1,11 @@
+{
+	"name": "preside-ext-map-picker-assets",
+	"version": "0.1.0",
+	"dependencies": {
+		"grunt": "^1.0.4",
+		"grunt-contrib-clean": "^2.0.0",
+		"grunt-contrib-rename": "0.2.0",
+		"grunt-contrib-uglify": "^4.0.1",
+		"grunt-rev": "^0.1.0"
+	}
+}
