@@ -4,9 +4,10 @@ node_modules
 .sass-cache
 
 *.css
-!css/lib/*.css
 *.css.map
 
 *.min.map
 *.min.js
-!js/lib/*.js
+
+!lib/**/*.css
+!lib/**/*.js
