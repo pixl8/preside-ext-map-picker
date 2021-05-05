@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form i18nBaseUri="system-config.leaflet:">
+	<tab id="default">
+		<fieldset id="main">
+			<field name="accessToken" type="string" maxlength="200" control="textInput" required="true" sortorder="10" />
+		</fieldset>
+		<fieldset id="mapdefaults">
+			<field sortorder="10" name="defaultLatitude" />
+			<field sortorder="20" name="defaultLongitude" />
+			<field sortorder="30" name="defaultZoom" type="numeric" dbtype="int" />
+			<field sortorder="40" name="locationPicker" label="Locate on map" control="mapPicker" latitudeField="defaultLatitude" longitudeField="defaultLongitude" zoomField="defaultZoom" />
+		</fieldset>
+	</tab>
+</form>

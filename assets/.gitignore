@@ -1,0 +1,12 @@
+jmimemagic.log
+.DS_Store
+node_modules
+.sass-cache
+
+*.css
+!css/lib/*.css
+*.css.map
+
+*.min.map
+*.min.js
+!js/lib/*.js
