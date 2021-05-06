@@ -1,6 +1,6 @@
 {
     "name":"PresideCMS Extension: Map picker",
-    "shortDescription":"An admin map location picker omplementing Leaflet maps",
+    "shortDescription":"An admin map location picker implementing Leaflet maps",
     "type":"preside-extensions",
     "version":"VERSION_NUMBER",
     "location":"https://bitbucket.org/REPO_FULL_NAME/downloads/ZIP_FILE",
