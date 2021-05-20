@@ -20,7 +20,7 @@ component {
 			, maxZoom          = int( leafletConfig.maxZoom     ?: 18 )
 			, defaultLatitude  = leafletConfig.defaultLatitude  ?: 54.003
 			, defaultLongitude = leafletConfig.defaultLongitude ?: -2.547
-			, defaultZoom      = int( leafletConfig.defaultZoom ?: 5 )
+			, defaultZoom      = isNumeric( leafletConfig.defaultZoom ?: "" ) ? int( leafletConfig.defaultZoom ) : 5
 			, zoomToFit        = false
 			, markers          = []
 		};
