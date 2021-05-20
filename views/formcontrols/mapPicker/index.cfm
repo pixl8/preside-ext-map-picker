@@ -22,16 +22,16 @@
 			<cfif len( postcodeField )>
 				<button type="button" class="btn btn-info marker-set-at-postcode">
 					<i class="fa fa-fw fa-location-arrow"></i>
-					Set marker at postcode
+					#translateResource( "formcontrols.mapPicker:button.marker.at.postcode" )#
 				</button>
 			</cfif>
 			<button type="button" class="btn btn-info marker-set-at-centre">
 				<i class="fa fa-fw fa-crosshairs"></i>
-				Place marker at map centre
+				#translateResource( "formcontrols.mapPicker:button.marker.at.centre" )#
 			</button>
 			<button type="button" class="btn marker-reset">
 				<i class="fa fa-fw fa-undo"></i>
-				Reset marker
+				#translateResource( "formcontrols.mapPicker:button.marker.reset" )#
 			</button>
 		</div>
 	</div>
