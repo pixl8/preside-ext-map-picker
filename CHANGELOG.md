@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.3
+
+* Don't round the default lat/long to integers!
+
 ## v1.0.2
 
 * Handle empty default lat/long settings
