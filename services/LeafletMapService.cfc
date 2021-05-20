@@ -16,9 +16,9 @@ component {
 		var leafletConfig = $getPresideCategorySettings( "leaflet" );
 		var mapData       = {
 			  accessToken      = leafletConfig.accessToken ?: ""
-			, defaultLatitude  = leafletConfig.defaultLatitude  ?: 54.003
-			, defaultLongitude = leafletConfig.defaultLongitude ?: -2.547
-			, defaultZoom      = isNumeric( leafletConfig.defaultZoom ?: "" ) ? int( leafletConfig.defaultZoom ) : 5
+			, defaultLatitude  = isNumeric( leafletConfig.defaultLatitude  ?: "" ) ? int( leafletConfig.defaultLatitude  ) : 54.003
+			, defaultLongitude = isNumeric( leafletConfig.defaultLongitude ?: "" ) ? int( leafletConfig.defaultLongitude ) : -2.547
+			, defaultZoom      = isNumeric( leafletConfig.defaultZoom      ?: "" ) ? int( leafletConfig.defaultZoom      ) : 5
 			, zoomToFit        = false
 			, markers          = []
 		};
