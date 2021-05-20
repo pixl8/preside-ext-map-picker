@@ -16,14 +16,14 @@ component {
 		var leafletConfig = $getPresideCategorySettings( "leaflet" );
 		var mapData       = {
 			  accessToken      = leafletConfig.accessToken ?: ""
-			, zoom             = int( leafletConfig.initialZoom ?: 14 )
-			, maxZoom          = int( leafletConfig.maxZoom     ?: 18 )
 			, defaultLatitude  = leafletConfig.defaultLatitude  ?: 54.003
 			, defaultLongitude = leafletConfig.defaultLongitude ?: -2.547
-			, defaultZoom      = int( leafletConfig.defaultZoom ?: 5 )
+			, defaultZoom      = isNumeric( leafletConfig.defaultZoom ?: "" ) ? int( leafletConfig.defaultZoom ) : 5
 			, zoomToFit        = false
 			, markers          = []
 		};
+
+		$announceInterception( "postGetBaseMapData", { mapData=mapData, leafletConfig=leafletConfig } );
 
 		return mapData;
 	}
