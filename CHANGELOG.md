@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.4
+
+* Move text labels to i18n
+* Add warning message if no access token has been set
+
 ## v1.0.3
 
 * Don't round the default lat/long to integers!
