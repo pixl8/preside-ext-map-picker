@@ -3,11 +3,15 @@ component {
 	property name="leafletMapService" inject="LeafletMapService";
 
 	private function index( event, rc, prc, args={} ) {
+		var mapData = leafletMapService.getBaseMapData();
+
+		if ( !len( mapData.accessToken ) ) {
+			return translateResource( "formcontrols.mapPicker:required.access.token" );
+		}
 		if ( !len( args.latitudeField ?: "" ) || !len( args.latitudeField ?: "" ) ) {
-			return "Map control requires both <code>latitudeField</code> and <code>longitudeField</code> to be configured.";
+			return translateResource( "formcontrols.mapPicker:required.arguments" );
 		}
 
-		var mapData = leafletMapService.getBaseMapData();
 		mapData.alertPosition = getSetting( "adminNotificationsPosition" );
 
 		if ( len( args.zoomField ?: "" ) && isNumeric( args.savedData[ args.zoomField ] ?: "" ) ) {
