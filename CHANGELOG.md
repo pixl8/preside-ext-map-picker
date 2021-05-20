@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.2
+
+* Handle empty default lat/long settings
+
 ## v1.0.1
 
 * Remove custom settings, add postGetBaseMapData interceptor
