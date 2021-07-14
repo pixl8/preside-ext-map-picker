@@ -1,0 +1,7 @@
+{
+	  "id"        : "preside-ext-chart-js"
+	, "title"     : "Chart.js for Preside"
+	, "author"    : "Pixl8 Group"
+	, "version"   : "$VERSION_NUMBER"
+	, "dependsOn" : []
+}
