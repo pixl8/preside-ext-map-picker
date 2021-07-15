@@ -18,6 +18,8 @@ component output=false {
 			}
 		);
 
+		bundle.addAsset( id="chartjs", path="/lib/chartjs/3.4.1/chart.min.js" );
+
 	}
 
 }

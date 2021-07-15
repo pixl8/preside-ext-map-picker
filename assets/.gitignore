@@ -3,3 +3,6 @@
 *.min.css
 *.less.css
 *.min.map
+
+!/lib/**/*.js
+!/lib/**/*.css
