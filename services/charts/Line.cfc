@@ -3,9 +3,10 @@
  */
 component accessors=true extends="Chart" {
 
-	property name="tension" type="numeric" default=0;
-	property name="filled"  type="boolean" default=false;
-	property name="stepped" type="boolean" default=false;
+	property name="tension"  type="numeric" default=0;
+	property name="filled"   type="boolean" default=false;
+	property name="stepped"  type="boolean" default=false;
+	property name="spanGaps" type="boolean" default=false;
 
 // CONSTRUCTOR
 	public any function init( required any utils ) {
@@ -22,6 +23,9 @@ component accessors=true extends="Chart" {
 		}
 		if ( getStepped() ) {
 			config.options.stepped = true;
+		}
+		if ( getSpanGaps() ) {
+			config.options.spanGaps = true;
 		}
 
 		return config;

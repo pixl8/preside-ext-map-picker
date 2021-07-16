@@ -20,7 +20,13 @@ component accessors=true extends="Chart" {
 		}
 		if ( getStacked() ) {
 			config.options.scales.x.stacked = true;
-			config.options.scales.y.stacked = true;
+			if ( getScales().len() ) {
+				for( var scale in getScales() ) {
+					config.options.scales[ scale.id ].stacked = true;
+				}
+			} else {
+				config.options.scales.y.stacked = true;
+			}
 		}
 
 		return config;
