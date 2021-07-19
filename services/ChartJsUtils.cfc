@@ -32,8 +32,13 @@ component {
 		var config = {
 			  type    = chart.getType()
 			, data    = { datasets=[] }
-			, options = chart.getOptions()
+			, options = {}
 		};
+
+		var options = chart.getOptions();
+		for( var option in options ) {
+			"config.options.#option#" = options[ option ];
+		}
 
 		// Title and Subtitle
 		if ( !isEmpty( chart.getTitle() ) ) {
@@ -92,7 +97,10 @@ component {
 
 		// Scales
 		chart.getScales().each( function( scale, index ){
-			var scaleConfig = duplicate( scale.options );
+			var scaleConfig = {};
+			for( var option in scale.options ) {
+				"scaleConfig.#option#" = scale.options[ option ];
+			}
 
 			if ( !isEmpty( scale.label ) ) {
 				scaleConfig.title.text    = scale.label;
@@ -134,6 +142,9 @@ component {
 				dataset.delete( "stack" );
 			}
 
+			for( var option in dataset.options ) {
+				"dataset.#option#" = dataset.options[ option ];
+			}
 			dataset.append( dataset.options );
 			dataset.delete( "options" );
 			dataset.delete( "scale" );

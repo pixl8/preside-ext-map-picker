@@ -47,7 +47,15 @@ component accessors=true {
 		,          string stack
 		,          struct options = {}
 	) {
-		getDatasets().append( arguments );
+		var options       = duplicate( arguments.options );
+		arguments.options = {};
+		var dataset       = duplicate( arguments );
+
+		for( var option in options ) {
+			"dataset.options.#option#" = options[ option ];
+		}
+		getDatasets().append( dataset );
+
 		return this;
 	}
 
