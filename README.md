@@ -2,7 +2,7 @@
 
 This extension provides simple integration of charts into Preside, implementing the [Chart.js](https://www.chartjs.org/) library.
 
-Te aim of the extension is to provide simple access to the most commonly-used functionality of the library, while also enabling more complex customisation using configuration options which can be found in the [Chart.js documentation](https://www.chartjs.org/docs/latest/).
+The aim of the extension is to provide simple access to the most commonly-used functionality of the library, while also enabling more complex customisation using configuration options which can be found in the [Chart.js documentation](https://www.chartjs.org/docs/latest/).
 
 ## Quick start
 
@@ -61,7 +61,7 @@ Sets the proportions of the chart. The number provided should be the ratio of wi
 
 By default, line and bar charts have an aspect ratio of 2, while pie and doughnut charts have an aspect ratio of 1 (i.e. square).
 
-If a height has been set on the chart, the aspect ration will be ignored.
+If a height has been set on the chart, the aspect ratio will be ignored.
 
 ### `setTitle( string | string[] )`
 
@@ -157,7 +157,7 @@ See **Stacking** below for more fine-grained stacking control.
 
 ## Pie / Doughnut charts
 
-Pie and doughnut charts are essentially the same, except that doughnut charts have a cutout circle in the center.
+Pie and doughnut charts are essentially the same, except that doughnut charts have a circular cut-out in the centre.
 
 They have no additional properties.
 
@@ -237,7 +237,7 @@ Axes can be configured using `chart.addScale()`, which has a number of arguments
 
 `suggestedMin` and `suggestedMax` define the *suggested* minimum and maximum values of the scale. If a dataset has values outside the range, the scale will be extended accordingly.
 
-`options` is an optional struct of additional options to apply to the scale, As elsewhere, each option should have as its key the full dotted path of the setting.
+`options` is an optional struct of additional options to apply to the scale. As elsewhere, each option should have as its key the full dotted path of the setting.
 
 Here is an example of scales in use:
 
@@ -287,23 +287,23 @@ This is the default theme:
 
 ```
 settings.chartjs.themes.default = {
-			  backgroundColor = [
-				  "rgba( 255, 99, 132, 0.7 )"
-				, "rgba( 54, 162, 235, 0.7 )"
-				, "rgba( 255, 206, 86, 0.7 )"
-				, "rgba( 75, 192, 192, 0.7 )"
-				, "rgba( 153, 102, 255, 0.7 )"
-				, "rgba( 255, 159, 64, 0.7 )"
-			  ]
-			, borderColor     = [
-				  "rgba( 255, 99, 132, 1 )"
-				, "rgba( 54, 162, 235, 1 )"
-				, "rgba( 255, 206, 86, 1 )"
-				, "rgba( 75, 192, 192, 1 )"
-				, "rgba( 153, 102, 255, 1 )"
-				, "rgba( 255, 159, 64, 1 )"
-			]
-		};
+	  backgroundColor = [
+		  "rgba( 255, 99, 132, 0.7 )"
+		, "rgba( 54, 162, 235, 0.7 )"
+		, "rgba( 255, 206, 86, 0.7 )"
+		, "rgba( 75, 192, 192, 0.7 )"
+		, "rgba( 153, 102, 255, 0.7 )"
+		, "rgba( 255, 159, 64, 0.7 )"
+	  ]
+	, borderColor     = [
+		  "rgba( 255, 99, 132, 1 )"
+		, "rgba( 54, 162, 235, 1 )"
+		, "rgba( 255, 206, 86, 1 )"
+		, "rgba( 75, 192, 192, 1 )"
+		, "rgba( 153, 102, 255, 1 )"
+		, "rgba( 255, 159, 64, 1 )"
+	  ]
+};
 ```
 
 The extension comes with a `default` theme, which is used by default by any chart on the frontend of your website. You may either overwrite this with your own defaults, or add another theme of your own.
@@ -322,7 +322,7 @@ Chart.js provides the ability to set defaults for your charts, which will propag
 
 The extension provides the ability to set the chart defaults at the start of a page, both by including preset defaults and custom instance-specific settings. This is done by calling the `setChartDefaults()` helper method - this should be done before rendering any charts on a page, and will apply to all charts on the page.
 
-The method takes two arguments (both optional): `config`, which is a string value referring to a predefined set of defaults from `Config.cfc`; and `custom`, a struct containing adhoc settings which can be set within the context of a single page.
+The method takes two arguments (both optional): `config`, which is a string value referring to a predefined set of defaults from `Config.cfc`; and `custom`, a struct containing ad-hoc settings which can be set within the context of a single page.
 
 ```
 setChartDefaults(
