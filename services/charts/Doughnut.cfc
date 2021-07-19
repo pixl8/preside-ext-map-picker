@@ -9,6 +9,8 @@ component accessors=true extends="Chart" {
 
 		setType( "doughnut" );
 		setColourMode( "datapoint" );
+
+		return this;
 	}
 
 

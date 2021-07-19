@@ -9,6 +9,8 @@ component accessors=true extends="Chart" {
 
 		setType( "pie" );
 		setColourMode( "datapoint" );
+
+		return this;
 	}
 
 

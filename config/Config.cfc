@@ -59,6 +59,7 @@ component {
 		settings.chartjs.themes.purple = _buildTheme( 270, 100 );
 		settings.chartjs.themes.pink   = _buildTheme( 320, 100 );
 
+		settings.chartjs.types    = [ "line", "bar", "pie", "doughnut" ];
 		settings.chartjs.defaults = {
 			  admin   = {
 				  "font.family" = "'Preside Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif"

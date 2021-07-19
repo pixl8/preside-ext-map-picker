@@ -6,9 +6,11 @@ component {
 
 // CONSTRUCTOR
 	/**
-	 * @themes.inject    coldbox:setting:chartjs.themes
+	 * @types.inject    coldbox:setting:chartjs.types
+	 * @themes.inject   coldbox:setting:chartjs.themes
 	 */
-	public any function init( required struct themes ) {
+	public any function init( required array types, required struct themes ) {
+		_setTypes( arguments.types );
 		_setThemes( arguments.themes );
 
 		return this;
@@ -20,7 +22,8 @@ component {
 		,          string theme = $getRequestContext().isAdminRequest() ? "admin" : "default"
 		,          string id    = _generateId()
 	) {
-		var chart = new "charts.#arguments.type#"( utils=this );
+		var chart = _getChartInstance( arguments.type );
+
 		chart.setTheme( arguments.theme );
 		chart.setId( arguments.id );
 
@@ -164,6 +167,16 @@ component {
 
 
 // PRIVATE HELPERS
+	private Chart function _getChartInstance( required string type ) {
+		var validTypes = _getTypes();
+
+		if ( !validTypes.findNoCase( arguments.type ) ) {
+			throw( type="charts.invalid.type", message="Invalid chart type specified. Chart type must be one of: [ #validTypes.toList( ", " )# ]" );
+		}
+
+		return createObject( "charts.#arguments.type#" ).init( utils=this );
+	};
+
 	private string function _generateId() {
 		return "chart" & lcase( replace ( createUUID(), "-", "", "all" ) );
 	}
@@ -176,12 +189,18 @@ component {
 
 
 // GETTERS AND SETTERS
-	private any function _getThemes() {
-		return _themes;
+	private array function _getTypes() {
+		return _types;
 	}
-	private void function _setThemes( required any themes ) {
-		_themes = arguments.themes;
+	private void function _setTypes( required array types ) {
+		_types = arguments.types;
 	}
 
+	private struct function _getThemes() {
+		return _themes;
+	}
+	private void function _setThemes( required struct themes ) {
+		_themes = arguments.themes;
+	}
 
 }

@@ -12,6 +12,8 @@ component accessors=true extends="Chart" {
 
 		setType( "bar" );
 		setColourMode( "dataset" );
+
+		return this;
 	}
 
 	public struct function applyTypeConfig( required struct config ) {
