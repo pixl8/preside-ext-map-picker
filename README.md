@@ -10,8 +10,8 @@ Below is the simplest creation of a line chart:
 
 ```
 #newChart( "line" )
-	.setLabels( [ 'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6' ] )
-	.addDataset( 'Counts', [ 12, 19, 3, 8, 12, 22 ] )
+	.setLabels( [ "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6" ] )
+	.addDataset( "Counts", [ 12, 19, 3, 8, 12, 22 ] )
 	.render()#
 ```
 
@@ -73,11 +73,11 @@ Subtitle for the chart. If an array of strings is provided, each will be display
 
 ### `setTitlePosition()`
 
-"top" | "bottom" | "left" | "right" (top is default)
+`top` | `bottom` | `left` | `right` (top is default)
 
 ### `setTitleAlign()`
 
-"start" | "center" | "end" (center is default)
+`start` | `center` | `end` (center is default)
 
 ### `setShowLegend( boolean )`
 
@@ -85,11 +85,11 @@ The chart legend is displayed by default, but can be hidden by setting `setShowL
 
 ### `setLegendPosition()`
 
-"top" | "bottom" | "left" | "right" (top is default)
+`top` | `bottom` | `left` | `right` (top is default)
 
 ### `setLegendAlign()`
 
-"start" | "center" | "end" (center is default)
+`start` | `center` | `end` (center is default)
 
 ### `setAnimation( boolean )`
 
@@ -103,9 +103,23 @@ The theme can either be set when creating a new chart, or by using this method o
 
 This is set automatically by each chart type, but can be overridden if desired.
 
-"dataset" will use the nth colour in the theme for all points in a dataset, where n is the index of the dataset (the first dataset will use the first colour, etc). Used by default for line and bar charts.
+`dataset` will use the nth colour in the theme for all points in a dataset, where n is the index of the dataset (the first dataset will use the first colour, etc). Used by default for line and bar charts.
 
-"datapoint" will cycle through the colours in the theme for each point in a dataset. Used by default by pie and doughnut charts.
+`datapoint` will cycle through the colours in the theme for each point in a dataset. Used by default by pie and doughnut charts.
+
+### `setOptions( struct )`
+
+Set an optional struct containing additional settings that are available in the Chart.js library but are not implemented in this extension. For instance, you might pass in:
+
+```
+chart.setOptions( {
+	  "animation.duration"     = 500
+	, "plugins.legend.reverse" = true
+} );
+```
+
+Note that, as in the example, the struct keys should be the full dotted path of the setting.
+
 
 ## Line charts
 
@@ -129,7 +143,7 @@ By default, if a point in a dataset is null, there will be a gap in the line. By
 
 ## Bar charts
 
-A bar chart plots a solid filled block from zero to the poimt's value, and have a couple of additional settings:
+A bar chart plots a solid filled block from zero to the point's value, and have a couple of additional settings:
 
 ### `setHorizontal()`
 
@@ -158,13 +172,13 @@ A chart's data is made up of an array of labels for the x-axis, and one or more 
 Looking again at our simple example above, we can see the labels being added using `addLabels()`:
 
 ```
-chart.setLabels( [ 'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6' ] );
+chart.setLabels( [ "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6" ] );
 ```
 
 We can then add an array of datapoints using `addDataSet( label, data, scale, stack, options )`. The required arguments for this are `label` (a name describing the dataset) and `data` (an array of values). Note that you can include null values in the array if a point does not have any data. This will then not be plotted, but is different from a value of 0!
 
 ```
-chart.addDataset( 'Counts', [ 12, 19, 3, 8, 12, 22 ] );
+chart.addDataset( "Counts", [ 12, 19, 3, 8, 12, 22 ] );
 ```
 
 `scale` and `stack` are optional string values, and will be addressed in their respective sections below.
@@ -172,15 +186,16 @@ chart.addDataset( 'Counts', [ 12, 19, 3, 8, 12, 22 ] );
 `options` is an optional struct containing additional settings that are available in the Chart.js library but are not implemented in this extension. For instance, you might pass in:
 
 ```
-chart.addDataset( label='Counts', data=[ 12, 19, 3, 8, 12, 22 ], options={ backgroundColor="rgba(0,0,0,0.5)" } );
+chart.addDataset( label="Counts", data=[ 12, 19, 3, 8, 12, 22 ], options={ backgroundColor="rgba(0,0,0,0.5)" } );
 ```
+
 ...which would allow you to specify a custom colour for this dataset. For all the available options, see the Chart.js documentation.
 
 You can add multiple datasets to a chart, like this:
 
 ```
-chart.addDataset( 'Counts', [ 12, 19, 3, 8, 12, 22 ] )
-     .addDataset( 'Average age', [ 30, 23, 19, 35, 13, 27 ] );
+chart.addDataset( "Counts", [ 12, 19, 3, 8, 12, 22 ] )
+     .addDataset( "Average age", [ 30, 23, 19, 35, 13, 27 ] );
 ```
 
 You should always ensure that you have the same number of datapoints in eact dataset as you have in your array of labels.
@@ -204,11 +219,65 @@ As with the examples above, each dataset object in the array can also include `s
 
 ## Scales
 
-*TODO*
+If the chart's axes are not otherwise configured, a chart will have an x-axis displaying labels, and a single y-axis showing values, the extent of which will be derived from the data.
+
+Axes can be configured using `chart.addScale()`, which has a number of arguments:
+
+`id` (required) is an ID that can be used when assigning this scale to a dataset.
+
+`axis` (required) will be either `x` or `y`, and denotes which axis the scale applies to.
+
+`label` is the label to be attached to the scale. As with other labels, this may be a string or an array of strings.
+
+`position` specifies where on the chart the scale should be displayed. One of `left`, `right`, `top`, `bottom`, `center`.
+
+`showGrid` is a boolean value which determines if gridlines should be displayed for a scale. Defaults to `true`.
+
+`min` and `max` define the *absolute* minimum and maximum values of the scale.
+
+`suggestedMin` and `suggestedMax` define the *suggested* minimum and maximum values of the scale. If a dataset has values outside the range, the scale will be extended accordingly.
+
+`options` is an optional struct of additional options to apply to the scale, As elsewhere, each option should have as its key the full dotted path of the setting.
+
+Here is an example of scales in use:
+
+```
+var barChart = newChart( "bar" )
+	.addScale( id="myLabels", axis="x", label="Title for the labels (x) axis" )
+	.addScale( id="scale1", axis="y", label="My primary y-axis label" )
+	.addScale( id="scale2", axis="y", label="Secondary y-axis label", showGrid=false, position="right", suggestedMin=0, suggestedMax=10 )
+	.setLabels( [ ... ] )
+	.addDataset( label="Set 1", data=[ ... ], scale="scale1" )
+	.addDataset( label="Set 2", data=[ ... ], scale="scale1" )
+	.addDataset( label="Set 3", data=[ ... ], scale="scale2", options={ type="line" } );
+```
+
+There's a little bit to unpack here.
+
+The first scale defines the x-axis, and all we are doing is setting a label for the axis.
+
+The second scale defines a y-axis, and gives it a title. By default it will display to the left.
+
+The third scale defines an additional y-axis. This scale will display to the right of the chart; will not display gridlines, and will have a *suggested* range of 0 to 10 (but can be extended based on the data).
+
+We are setting the first two datasets to use `scale1`. But the third dataset will use `scale2`, and we are also making use of the `options` to create a mixed chart by setting this dataset to display as a line, even though the chart itself is a bar chart. (The reverse is also possible, plotting a series of data as bars on a line chart.)
 
 ## Stacking
 
-*TODO*
+Bar charts can be set to display the data as stacked at the chart level, using `chart.setStacked( true )`.
+
+However, you may have more specific stacking requirements. For example, you may have three datasets, two of which should be shown stacked, but the third as standalone.
+
+This can be achieved by adding a `stack` value to each dataset. It doesn't matter what you label the stacks as; but datasets with the same stack ID will be stacked together:
+
+```
+var barChart = newChart( "bar" )
+	.setStacked( true )
+	.setLabels( [ ... ] )
+	.addDataset( label="Set 1", data=[ ... ], stack="stack1" )
+	.addDataset( label="Set 2", data=[ ... ], stack="stack1" )
+	.addDataset( label="Set 3", data=[ ... ], stack="stack2" );
+```
 
 ## Themes
 
@@ -219,20 +288,20 @@ This is the default theme:
 ```
 settings.chartjs.themes.default = {
 			  backgroundColor = [
-				  'rgba( 255, 99, 132, 0.7 )'
-				, 'rgba( 54, 162, 235, 0.7 )'
-				, 'rgba( 255, 206, 86, 0.7 )'
-				, 'rgba( 75, 192, 192, 0.7 )'
-				, 'rgba( 153, 102, 255, 0.7 )'
-				, 'rgba( 255, 159, 64, 0.7 )'
+				  "rgba( 255, 99, 132, 0.7 )"
+				, "rgba( 54, 162, 235, 0.7 )"
+				, "rgba( 255, 206, 86, 0.7 )"
+				, "rgba( 75, 192, 192, 0.7 )"
+				, "rgba( 153, 102, 255, 0.7 )"
+				, "rgba( 255, 159, 64, 0.7 )"
 			  ]
 			, borderColor     = [
-				  'rgba( 255, 99, 132, 1 )'
-				, 'rgba( 54, 162, 235, 1 )'
-				, 'rgba( 255, 206, 86, 1 )'
-				, 'rgba( 75, 192, 192, 1 )'
-				, 'rgba( 153, 102, 255, 1 )'
-				, 'rgba( 255, 159, 64, 1 )'
+				  "rgba( 255, 99, 132, 1 )"
+				, "rgba( 54, 162, 235, 1 )"
+				, "rgba( 255, 206, 86, 1 )"
+				, "rgba( 75, 192, 192, 1 )"
+				, "rgba( 153, 102, 255, 1 )"
+				, "rgba( 255, 159, 64, 1 )"
 			]
 		};
 ```
@@ -249,7 +318,34 @@ You can add as many themes as you like, and choose whichever you want for any in
 
 ## Defaults
 
-*TODO*
+Chart.js provides the ability to set defaults for your charts, which will propagate to other settings. These may include font settings which will be picked up by multiple other settings.
+
+The extension provides the ability to set the chart defaults at the start of a page, both by including preset defaults and custom instance-specific settings. This is done by calling the `setChartDefaults()` helper method - this should be done before rendering any charts on a page, and will apply to all charts on the page.
+
+The method takes two arguments (both optional): `config`, which is a string value referring to a predefined set of defaults from `Config.cfc`; and `custom`, a struct containing adhoc settings which can be set within the context of a single page.
+
+```
+setChartDefaults(
+	  config = "admin"
+	, custom = {
+		"font.family" = "'Comic Sans'"
+	  }
+);
+```
+
+The example above uses the `admin` defaults provided with the extension, which applies font settings that match those of the Preside admin:
+
+```
+settings.chartjs.defaults.admin = {
+	  "font.family" = "'Preside Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif"
+	, "font.size"   = 14
+	, "color"       = "##393939"
+}
+```
+
+...but also overrides the font family setting for this page (custom defaults passed in take precedence over those contained in predefined sets).
+
+As with chart options, each default should have as its key the full dotted path of the setting.
 
 ## Rendering your chart
 
