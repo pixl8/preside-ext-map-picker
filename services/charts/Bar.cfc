@@ -21,13 +21,18 @@ component accessors=true extends="Chart" {
 			config.options.indexAxis = "y";
 		}
 		if ( getStacked() ) {
-			config.options.scales.x.stacked = true;
+			var definedAxes = [];
 			if ( getScales().len() ) {
 				for( var scale in getScales() ) {
 					config.options.scales[ scale.id ].stacked = true;
+					definedAxes.append( scale.axis );
 				}
-			} else {
-				config.options.scales.y.stacked = true;
+			}
+
+			for( var axis in [ "x", "y" ] ) {
+				if ( !definedAxes.find( axis ) ) {
+					config.options.scales[ axis ].stacked = true;
+				}
 			}
 		}
 
