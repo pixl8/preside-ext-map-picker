@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.2
+
+* Change chart init to callable function
+
 ## v0.2.1
 
 * Better bar stacking - fix for horizontal charts
