@@ -124,7 +124,8 @@ component {
 		} );
 
 		// Datasets
-		chart.getDatasets().each( function( dataset, index ){
+		chart.getDatasets().each( function( srcDataset, index ){
+			var dataset     = Duplicate( srcDataset );
 			var colourIndex = index mod theme.backgroundColor.len();
 			if ( colourIndex == 0 ) {
 				colourIndex = theme.backgroundColor.len();

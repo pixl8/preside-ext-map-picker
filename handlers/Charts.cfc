@@ -26,7 +26,7 @@ component {
 		}
 
 		event.include( "chartjs" );
-		event.includeInlineJs( "var #id# = new Chart( document.getElementById( '#id#' ), #chart.getConfig()# );" );
+		event.includeInlineJs( "#id#_init();" );
 
 		return renderView( view="charts/_chart", args={ chart=chart, styles=styles, id=id } );
 	}
