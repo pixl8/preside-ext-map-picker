@@ -1,6 +1,7 @@
 {
 	  "id"        : "preside-ext-map-picker"
 	, "title"     : "Map Picker"
-	, "author"    : "Seb Duggan"
-	, "version"   : "VERSION_NUMBER"
+	, "author"    : "Pixl8 Group"
+	, "version"   : "$VERSION_NUMBER"
+	, "dependsOn" : []
 }

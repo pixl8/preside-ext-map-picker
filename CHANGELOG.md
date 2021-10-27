@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.5
+
+* Move to Pixl8 GitHub
+* Set up GitHub Actions for build/deploy
+
 ## v1.0.4
 
 * Move text labels to i18n
