@@ -1,25 +1,23 @@
 {
-    "name":"PresideCMS Extension: Map picker",
+    "name":"Preside Extension: Map picker",
     "shortDescription":"An admin map location picker implementing Leaflet maps",
     "type":"preside-extensions",
-    "version":"VERSION_NUMBER",
-    "location":"https://bitbucket.org/REPO_FULL_NAME/downloads/ZIP_FILE",
-    "author":"Seb Duggan",
+    "version":"$VERSION_NUMBER",
+    "location":"$DOWNLOAD_URL",
+    "private":false,
+    "author":"Pixl8 Group",
     "directory":"application/extensions",
-    "homepage":"https://bitbucket.org/REPO_FULL_NAME",
-    "documentation":"https://bitbucket.org/REPO_FULL_NAME",
     "repository":{
         "type":"git",
-        "URL":"https://bitbucket.org/REPO_FULL_NAME"
+        "URL":"https://github.com/pixl8/preside-ext-map-picker"
     },
-    "bugs":"https://bitbucket.org/REPO_FULL_NAME/issues",
     "slug":"preside-ext-map-picker",
-    "projectURL":"",
+    "projectURL":"https://github.com/pixl8/preside-ext-map-picker",
     "ignore":[
         ".git/*",
         ".gitignore",
-        ".travis.yml",
+        ".github/*",
         ".twgit_features_subject",
-        "*.sh"
+        "tests"
     ]
 }
