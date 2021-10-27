@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.6
+
+* Re-publish
+
 ## v1.0.5
 
 * Move to Pixl8 GitHub
