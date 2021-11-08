@@ -1,0 +1,42 @@
+.frontend-map-picker {
+	display : flex;
+}
+.frontend-map-picker-map {
+	flex   : 1 1 auto;
+	height : 500px;
+}
+.frontend-map-picker-controls {
+	width          : 15em;
+	margin-left    : 1em;
+	display        : flex;
+	flex-direction : column;
+}
+.frontend-map-picker-controls > * {
+	flex : 0 0 auto;
+}
+.frontend-map-picker-controls > *:nth-child( n+2 ) {
+	margin-top : .5em;
+}
+.frontend-map-picker-controls > div.frontend-map-picker-results {
+	flex : 1 0 auto;
+}
+.frontend-map-picker-controls button {
+	width : 100%;
+}
+.frontend-map-picker-search {
+	text-align : center;
+}
+.frontend-map-picker-search-input {
+	width         : ~"calc( 100% - 3em )";
+	font          : inherit;
+	padding       : .2em .5em;
+	margin-bottom : .5em;
+	text-align    : center;
+}
+.frontend-map-picker-results select {
+	font  : inherit;
+	width : 100%;
+}
+.frontend-map-picker-error {
+	color : #900;
+}

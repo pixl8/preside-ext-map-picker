@@ -1,17 +1,14 @@
 ( function( $ ) {
 
-	$.fn.leafletMapPicker = function() {
+	$.fn.adminMapPicker = function() {
 		return this.each( function(){
 			var $mapContainer     = $( this )
-			  , $map              = $mapContainer.find( ".leaflet-map-picker-map" )
-			  , $setAtPostcodeBtn = $mapContainer.find( ".marker-set-at-postcode" )
-			  , $setAtCentreBtn   = $mapContainer.find( ".marker-set-at-centre" )
-			  , $resetBtn         = $mapContainer.find( ".marker-reset" )
+			  , $map              = $( ".admin-map-picker-map", $mapContainer )
 			  , mapId             = $map.attr( "id" )
-			  , $postcodeField    = $( "[name="+$map.attr( "postcodeField" )+"]" )
-			  , $latitudeField    = $( "[name="+$map.attr( "latitudeField" )+"]" )
-			  , $longitudeField   = $( "[name="+$map.attr( "longitudeField" )+"]" )
-			  , $zoomField        = $( "[name="+$map.attr( "zoomField" )+"]" )
+			  , $postcodeField    = $( "[name="+$map.data( "postcodeField" )+"]" )
+			  , $latitudeField    = $( "[name="+$map.data( "latitudeField" )+"]" )
+			  , $longitudeField   = $( "[name="+$map.data( "longitudeField" )+"]" )
+			  , $zoomField        = $( "[name="+$map.data( "zoomField" )+"]" )
 			  , zoom              = cfrequest.mapData.zoom
 			  , maxZoom           = cfrequest.mapData.maxZoom
 			  , accessToken       = cfrequest.mapData.accessToken
@@ -135,10 +132,10 @@
 				}
 			} );
 
-			$setAtPostcodeBtn.on( "click", function( e ){
+
+			$mapContainer.on( "click", ".marker-set-at-postcode", function( e ){
 				lookupPostcode( $postcodeField.val() );
-			} );
-			$resetBtn.on( "click", function( e ){
+			} ).on( "click", ".marker-reset", function( e ){
 				if ( hasInitLatLng ) {
 					marker.setLatLng( [ latitude, longitude ] );
 					updateFormFields( latitude, longitude );
@@ -147,8 +144,7 @@
 					clearFormFields();
 				}
 				map.flyTo( mapOptions.center, mapOptions.zoom );
-			} );
-			$setAtCentreBtn.on( "click", function( e ){
+			} ).on( "click", ".marker-set-at-centre", function( e ){
 				var pos = map.getCenter();
 				marker.setLatLng( pos ).addTo( map );
 				updateFormFields( pos.lat, pos.lng );
@@ -160,6 +156,6 @@
 
 	};
 
-	$( ".leaflet-map-picker" ).leafletMapPicker();
+	$( ".admin-map-picker" ).adminMapPicker();
 
 } )( presideJQuery );
