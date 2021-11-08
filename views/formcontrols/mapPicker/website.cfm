@@ -1,11 +1,16 @@
 <cfscript>
-	inputName        = args.name         ?: "";
-	inputId          = args.id           ?: "";
-	defaultValue     = args.defaultValue ?: "";
-	searchEnabled    = isTrue( args.searchEnabled ?: true );
-	searchFields     = args.searchFields ?: "";
-	searchType       = args.searchType   ?: "address";
-	searchStandalone = !Len( searchFields );
+	inputName         = args.name         ?: "";
+	inputId           = args.id           ?: "";
+	defaultValue      = args.defaultValue ?: "";
+	searchEnabled     = isTrue( args.searchEnabled ?: true );
+	searchFields      = args.searchFields ?: "";
+	searchType        = args.searchType   ?: "address";
+	searchStandalone  = !Len( searchFields );
+	searchInputClass  = args.searchInputClass  ?: "";
+	buttonClass       = args.buttonClass       ?: "";
+	searchButtonClass = args.searchButtonClass ?: "";
+	centreButtonClass = args.centreButtonClass ?: "";
+	resetButtonClass  = args.resetButtonClass  ?: "";
 
 	value  = event.getValue( name=inputName, defaultValue=defaultValue );
 	if ( not IsSimpleValue( value ) ) {
@@ -29,9 +34,9 @@
 			<cfif searchEnabled>
 				<div class="frontend-map-picker-search">
 					<cfif searchStandalone>
-						<input type="text" class="frontend-map-picker-search-input" placeholder="#translateResource( "formcontrols.mapPicker:frontend.search.placeholder.#searchType#" )#">
+						<input type="text" class="#searchInputClass# frontend-map-picker-search-input" placeholder="#translateResource( "formcontrols.mapPicker:frontend.search.placeholder.#searchType#" )#">
 					</cfif>
-					<button type="button" class="marker-set-by-search">
+					<button type="button" class="#buttonClass# #searchButtonClass# marker-set-by-search">
 						#translateResource( "formcontrols.mapPicker:frontend.button.marker.from.#searchType#" )#
 					</button>
 				</div>
@@ -40,10 +45,10 @@
 
 			<input type="hidden" size="100" name="#inputName#" id="#inputId#" value="#HtmlEditFormat( value )#">
 
-			<button type="button" class="btn marker-set-at-centre">
+			<button type="button" class="#buttonClass# #centreButtonClass# marker-set-at-centre">
 				#translateResource( "formcontrols.mapPicker:frontend.button.marker.at.centre" )#
 			</button>
-			<button type="button" class="marker-reset">
+			<button type="button" class="#buttonClass# #resetButtonClass# marker-reset">
 				#translateResource( "formcontrols.mapPicker:frontend.button.marker.reset" )#
 			</button>
 		</div>
