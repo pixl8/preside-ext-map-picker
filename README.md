@@ -81,6 +81,9 @@ There are a number of attributes that can be used to customise the map picker:
 - `searchType`: defaults to `address`, which will use the default logic described above. If set to `postcode`, the lookup will be a simple postcode lookup, whether or not the Geocodingapi key is configured.
 - `searchEnabled`: defaults to `true`. If set to `false`, neither address nor postcode lookup will be provided.
 - `searchFields`: empty by default. If empty, the picker will include its own search input field. But if set to the name (or comma-separated list of names) of another field within the form, then that/those fields will be used to do the location search (so the user does not need to enter data twice).
+- `buttonClass`: class to be applied to all buttons on the picker
+- `searchButtonClass`, `centreButtonClass`, `resetButtonClass`: class to be applied to specific buttons
+- `searchInputClass`: class to be applied to the picker's search input field
 
 An example of `searchFields`, which will concatenate the contents of the listed fields and send them to the geocoding service:
 
