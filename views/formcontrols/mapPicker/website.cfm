@@ -18,9 +18,6 @@
 	}
 </cfscript>
 
-<style>
-</style>
-
 <cfoutput>
 	<div class="frontend-map-picker">
 		<div class="frontend-map-picker-map"

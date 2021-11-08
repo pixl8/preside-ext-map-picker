@@ -10,7 +10,7 @@ It uses [Leaflet](https://leafletjs.com/) as its mapping API, and requires an ac
 
 It also includes UK postcode lookups via [Postcodes.io](https://postcodes.io/), either from a postcode field elsewhere in the form, or by manually entering a postcode to centre the map to.
 
-Full address geolocation is (optiionally) provided by [Geocodeapi.com](https://geocodeapi.com/). Sign up for an API key; the free plan offers 30,000 lookups per month - which should be plenty for most apps!
+Full address geolocation is (optionally) provided by [Geocodeapi.com](https://geocodeapi.com/). Sign up for an API key; the free plan offers 30,000 lookups per month - which should be plenty for most apps!
 
 ### What it doesn't do
 
