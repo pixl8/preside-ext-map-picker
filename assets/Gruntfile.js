@@ -1,11 +1,13 @@
 module.exports = function( grunt ) {
 
 	grunt.loadNpmTasks( 'grunt-contrib-clean'  );
+	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
+	grunt.loadNpmTasks( 'grunt-contrib-less'   );
 	grunt.loadNpmTasks( 'grunt-contrib-rename' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-rev'            );
 
-	grunt.registerTask( 'default', [ 'uglify', 'clean', 'rev', 'rename' ] );
+	grunt.registerTask( 'default', [ 'uglify', 'less', 'cssmin', 'clean', 'rev', 'rename' ] );
 
 	grunt.initConfig( {
 		uglify: {
@@ -35,10 +37,51 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		less: {
+			options: {
+				paths : [ "css/frontend" ],
+			},
+			all : {
+				files: [{
+					expand  : true,
+					cwd     : 'css/frontend/',
+					src     : ['**/*.less' ],
+					dest    : 'css/frontend/',
+					ext     : ".less.css",
+					rename  : function( dest, src ){
+						var pathSplit = src.split( '/' );
+
+						pathSplit[ pathSplit.length-1 ] = "$" + pathSplit[ pathSplit.length-1 ];
+
+						return dest + pathSplit.join( "/" );
+					}
+				}]
+			}
+		},
+
+		cssmin: {
+			all: {
+				expand : true,
+				cwd    : 'css/frontend/',
+				src    : [ '**/*.css', '!**/_*.min.css' ],
+				ext    : '.min.css',
+				dest   : 'css/frontend/',
+				rename : function( dest, src ){
+					var pathSplit = src.split( '/' );
+
+					pathSplit[ pathSplit.length-1 ] = "_" + pathSplit[ pathSplit.length-2 ] + ".min.css";
+					return dest + pathSplit.join( "/" );
+				}
+			}
+		},
+
 		clean: {
 			all : {
 				files : [{
-					  src    : "**/_*.min.js"
+					  src    : "js/**/_*.min.js"
+					, filter : function( src ){ return src.match(/[\/\\]_[a-f0-9]{8}\./) !== null; }
+				}, {
+					  src    : ["css/**/_*.min.css"]
 					, filter : function( src ){ return src.match(/[\/\\]_[a-f0-9]{8}\./) !== null; }
 				}]
 			}
@@ -52,6 +95,7 @@ module.exports = function( grunt ) {
 			all: {
 				files : [
 					  { src : "js/**/_*.min.js"  }
+					, { src : "css/**/_*.min.css"  }
 				]
 			}
 		},
@@ -60,7 +104,7 @@ module.exports = function( grunt ) {
 			assets: {
 				expand : true,
 				cwd    : '',
-				src    : '**/*._*.min.js',
+				src    : '**/*._*.min.{js,css}',
 				dest   : '',
 				rename : function( dest, src ){
 					var pathSplit = src.split( '/' );
