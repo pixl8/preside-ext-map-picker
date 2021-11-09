@@ -10,7 +10,7 @@ It uses [Leaflet](https://leafletjs.com/) as its mapping API, and requires an ac
 
 It also includes UK postcode lookups via [Postcodes.io](https://postcodes.io/), either from a postcode field elsewhere in the form, or by manually entering a postcode to centre the map to.
 
-Full address geolocation is (optionally) provided by [Geocodeapi.com](https://geocodeapi.com/). Sign up for an API key; the free plan offers 30,000 lookups per month - which should be plenty for most apps!
+Full address geolocation is (optionally) provided by the [Google Geocoding API](https://mapsplatform.google.com/). Sign up for an API key (with access to the Maps and Places APIs); note that this is a **paid-for service**.
 
 ### What it doesn't do
 
@@ -76,11 +76,11 @@ Frontend forms should be rendered in the `website` context.
 </form>
 ```
 
-The above code will use the default settings: the map will have a full address lookup field (if a Geocodingapi API key has been configured), or a simple UK postcode lookup (if no Geocoding API key is provided).
+The above code will use the default settings: the map will have a full address lookup field (if a Google API key has been configured), or a simple UK postcode lookup (if no Google API key is provided).
 
 There are a number of attributes that can be used to customise the map picker:
 
-- `searchType`: defaults to `address`, which will use the default logic described above. If set to `postcode`, the lookup will be a simple postcode lookup, whether or not the Geocodingapi key is configured.
+- `searchType`: defaults to `address`, which will use the default logic described above. If set to `postcode`, the lookup will be a simple postcode lookup, whether or not the Google API key is configured.
 - `searchEnabled`: defaults to `true`. If set to `false`, neither address nor postcode lookup will be provided.
 - `searchFields`: empty by default. If empty, the picker will include its own search input field. But if set to the name (or comma-separated list of names) of another field within the form, then that/those fields will be used to do the location search (so the user does not need to enter data twice).
 - `buttonClass`: class to be applied to all buttons on the picker
