@@ -5,6 +5,16 @@ component {
 		var settings = conf.settings ?: {};
 
 		conf.interceptorSettings.customInterceptionPoints.append( "postGetBaseMapData" );
+
+		settings.mapPicker.defaults = {
+			  buttonClass       = ""
+			, searchButtonClass = ""
+			, centreButtonClass = ""
+			, resetButtonClass  = ""
+			, searchInputClass  = ""
+			, resultSelectClass = ""
+			, lookupPageSize    = 10
+		};
 	}
 
 }

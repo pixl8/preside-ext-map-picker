@@ -6,11 +6,12 @@
 	searchFields      = args.searchFields ?: "";
 	searchType        = args.searchType   ?: "address";
 	searchStandalone  = !Len( searchFields );
-	searchInputClass  = args.searchInputClass  ?: "";
 	buttonClass       = args.buttonClass       ?: "";
 	searchButtonClass = args.searchButtonClass ?: "";
 	centreButtonClass = args.centreButtonClass ?: "";
 	resetButtonClass  = args.resetButtonClass  ?: "";
+	searchInputClass  = args.searchInputClass  ?: "";
+	resultSelectClass = args.resultSelectClass ?: "";
 
 	value  = event.getValue( name=inputName, defaultValue=defaultValue );
 	if ( not IsSimpleValue( value ) ) {
@@ -25,6 +26,7 @@
 			data-lat-lng-field="#inputName#"
 			data-search-fields="#searchFields#"
 			data-search-type="#searchType#"
+			data-result-select-class="#resultSelectClass#"
 		></div>
 
 		<div class="frontend-map-picker-controls">
