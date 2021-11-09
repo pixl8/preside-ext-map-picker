@@ -10,12 +10,11 @@
 			  , searchType        = $map.data( "searchType" )
 			  , resultSelectClass = $map.data( "resultSelectClass" )
 			  , $latLngField      = $( "[name="+$map.data( "latLngField" )+"]" )
-			  , lookupPageSize    = cfrequest.mapData.lookupPageSize
 			  , addressesFound    = cfrequest.mapData.addressesFound
 			  , zoom              = cfrequest.mapData.zoom
 			  , maxZoom           = cfrequest.mapData.maxZoom
 			  , accessToken       = cfrequest.mapData.accessToken
-			  , geocodeApiKey     = cfrequest.mapData.geocodeApiKey
+			  , googleApiKey      = cfrequest.mapData.googleApiKey
 			  , defaultLatitude   = cfrequest.mapData.defaultLatitude
 			  , defaultLongitude  = cfrequest.mapData.defaultLongitude
 			  , defaultZoom       = cfrequest.mapData.defaultZoom
@@ -52,7 +51,8 @@
 			    }
 			  , markerOptions     = { draggable: true, autoPan: true }
 			  , map               = L.map( mapId, mapOptions )
-			  , updateFormFields, clearFormFields, placeResultOnMap, doSearch, postcodeSearch, addressSearch, getSearchString, displayMultipleResults;
+			  , sessiontoken      = ""
+			  , updateFormFields, clearFormFields, placeResultOnMap, doSearch, postcodeSearch, addressSearch, getSearchString, displayMultipleResults, getPlaceById, uuidv4;
 
 			getSearchString = function() {
 				if ( !searchFields.length ) {
@@ -128,39 +128,67 @@
 					return;
 				}
 
-				$.ajax( {
-					method : "GET",
-					url    : "https://app.geocodeapi.io/api/v1/search",
-					data   : { apikey:geocodeApiKey, text:searchText, size:lookupPageSize }
-				} ).done( function( data, textStatus, jqXHR ) {
-					if ( data.features && data.features.length ) {
-						var coordinates       = data.features[ 0 ].geometry.coordinates;
-						lookupResult.success  = true;
-						lookupResult.multiple = data.features.length > 1;
-						lookupResult.features = data.features;
-						lookupResult.latlng   = [ coordinates[ 1 ], coordinates[ 0 ] ];
+				var service = new google.maps.places.AutocompleteService();
+				if ( !sessiontoken.length ) {
+					sessiontoken = uuidv4();
+				}
+
+				service.getPlacePredictions( { input:searchText, sessiontoken:sessiontoken }, function ( predictions, status ) {
+					if ( status != google.maps.places.PlacesServiceStatus.OK || !predictions ) {
+						lookupResult.error = errorMessages.unexpected;
+					} else if ( predictions.length ) {
+						lookupResult.success     = true;
+						lookupResult.multiple    = predictions.length > 1;
+						lookupResult.predictions = predictions;
+						lookupResult.placeId     = predictions[ 0 ].place_id;
 					} else {
 						lookupResult.error = errorMessages.notFound;
 					}
-				} ).fail( function( jqXHR, textStatus, errorThrown ) {
-					lookupResult.error = errorMessages.unexpected;
-				} ).always( function() {
 					if ( lookupResult.multiple ) {
 						displayMultipleResults( lookupResult );
 					} else {
-						placeResultOnMap( lookupResult );
+						getPlaceById( lookupResult.placeId );
 					}
 				} );
 			};
 			displayMultipleResults = function( lookupResult ) {
-				var options = lookupResult.features.map( function( feature ) {
-					return '<option value="' + feature.geometry.coordinates.reverse().join() + '">' + feature.properties.label + '</option>'
+				var options = lookupResult.predictions.map( function( prediction ) {
+					return '<option value="' + prediction.place_id + '">' + prediction.description + '</option>'
 				} );
 
-				var numberFound = lookupResult.features.length;
-				numberFound += numberFound >= lookupPageSize ? '+' : '';
-				options.unshift( '<option value="">' + numberFound + ' ' + addressesFound + '</option>' );
+				var predictionsFound = lookupResult.predictions.length;
+				if ( predictionsFound >= 5 ) {
+					predictionsFound += "+";
+				}
+				options.unshift( '<option value="">' + predictionsFound + ' ' + addressesFound + '</option>' );
 				$searchResults.html( '<select class="' + resultSelectClass + '">' + options.join( "" ) + '</select>' );
+			}
+			getPlaceById = function( placeId ) {
+				var service      = new google.maps.places.PlacesService( $searchResults[ 0 ] )
+				  , lookupResult = { success: false, error: "", latlng: [] };
+
+				if ( !sessiontoken.length ) {
+					sessiontoken = uuidv4();
+				}
+
+				service.getDetails( { placeId:placeId, sessiontoken:sessiontoken, fields:[ "geometry" ] }, function ( place, status ) {
+					if ( status != google.maps.places.PlacesServiceStatus.OK || !place ) {
+						lookupResult.error = errorMessages.unexpected;
+					} else if ( place.geometry.location ) {
+						lookupResult.success = true;
+						lookupResult.latlng  = [ place.geometry.location.lat(), place.geometry.location.lng() ];
+					} else {
+						lookupResult.error = errorMessages.notFound;
+					}
+					sessiontoken = "";
+					placeResultOnMap( lookupResult );
+				});
+			}
+
+			uuidv4 = function() {
+				return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+					(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+				);
 			}
 
 			L.control.layers( layers, null, { "collapsed": false } ).addTo( map );
@@ -199,13 +227,8 @@
 					return;
 				}
 
-				var latLng       = value.split( "," )
-				  , lookupResult = {
-					  success : true
-					, latlng  : [ parseFloat( latLng[ 0 ] ), parseFloat( latLng[ 1 ] ) ]
-				};
 				$( this ).remove();
-				placeResultOnMap( lookupResult );
+				getPlaceById( value );
 			} ).on( "keydown", ".frontend-map-picker-search-input", function( e ){
 				if ( e.keyCode == 13 ) {
 					e.preventDefault();

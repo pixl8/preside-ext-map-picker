@@ -15,8 +15,8 @@ component {
 	public struct function getBaseMapData() {
 		var leafletConfig = $getPresideCategorySettings( "leaflet" );
 		var mapData       = {
-			  accessToken      = leafletConfig.accessToken   ?: ""
-			, geocodeApiKey    = leafletConfig.geocodeApiKey ?: ""
+			  accessToken      = leafletConfig.accessToken  ?: ""
+			, googleApiKey     = leafletConfig.googleApiKey ?: ""
 			, defaultLatitude  = isNumeric( leafletConfig.defaultLatitude  ?: "" ) ? leafletConfig.defaultLatitude    : 54.003
 			, defaultLongitude = isNumeric( leafletConfig.defaultLongitude ?: "" ) ? leafletConfig.defaultLongitude   : -2.547
 			, defaultZoom      = isNumeric( leafletConfig.defaultZoom      ?: "" ) ? int( leafletConfig.defaultZoom ) : 5

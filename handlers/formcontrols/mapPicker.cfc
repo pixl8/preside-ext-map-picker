@@ -45,10 +45,8 @@ component {
 		args.resetButtonClass  = args.resetButtonClass  ?: mapPickerDefaults.resetButtonClass;
 		args.searchInputClass  = args.searchInputClass  ?: mapPickerDefaults.searchInputClass;
 		args.resultSelectClass = args.resultSelectClass ?: mapPickerDefaults.resultSelectClass;
+		args.searchType        = len( mapData.googleApiKey ) && ( ( args.searchType ?: "address" ) == "address" ) ? "address" : "postcode";
 
-		args.searchType        = len( mapData.geocodeApiKey ) && ( ( args.searchType ?: "address" ) == "address" ) ? "address" : "postcode";
-
-		mapData.lookupPageSize = mapPickerDefaults.lookupPageSize;
 		mapData.errors         = {
 			postcode = {
 				  title       = translateResource( "formcontrols.mapPicker:postcode.error.title" )
@@ -63,11 +61,9 @@ component {
 				, unexpected  = translateResource( "formcontrols.mapPicker:address.error.unexpected" )
 			}
 		};
-		mapData.i18n = {
-			multipleAddressesFound = translateResource( "formcontrols.mapPicker:addresses.found" )
-		};
 
 		event.includeData( { mapData=mapData } )
+			.includeUrl( url="https://maps.googleapis.com/maps/api/js?key=#mapData.googleApiKey#&libraries=places", type="js" )
 			.include( "/js/frontend/mapPicker/" )
 			.include( "/css/frontend/mapPicker/" );
 
