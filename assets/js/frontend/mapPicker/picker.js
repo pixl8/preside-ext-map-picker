@@ -8,6 +8,7 @@
 			  , mapId             = $map.attr( "id" )
 			  , searchFields      = $map.data( "searchFields" )
 			  , searchType        = $map.data( "searchType" )
+			  , resultSelectClass = $map.data( "resultSelectClass" )
 			  , $latLngField      = $( "[name="+$map.data( "latLngField" )+"]" )
 			  , lookupPageSize    = cfrequest.mapData.lookupPageSize
 			  , addressesFound    = cfrequest.mapData.addressesFound
@@ -158,8 +159,8 @@
 
 				var numberFound = lookupResult.features.length;
 				numberFound += numberFound >= lookupPageSize ? '+' : '';
-				options.unshift( '<option value="">' + numberFound + ' addresses found...</option>' );
-				$searchResults.html( '<select>' + options.join( "" ) + '</select>' );
+				options.unshift( '<option value="">' + numberFound + ' ' + addressesFound + '</option>' );
+				$searchResults.html( '<select class="' + resultSelectClass + '">' + options.join( "" ) + '</select>' );
 			}
 
 			L.control.layers( layers, null, { "collapsed": false } ).addTo( map );

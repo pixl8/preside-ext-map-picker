@@ -1,6 +1,7 @@
 component {
 
 	property name="leafletMapService" inject="LeafletMapService";
+	property name="mapPickerDefaults" inject="coldbox:setting:mapPicker.defaults";
 
 	private function index( event, rc, prc, args={} ) {
 		var mapData = leafletMapService.getBaseMapData();
@@ -32,14 +33,23 @@ component {
 	}
 
 	private function website( event, rc, prc, args={} ) {
-		var mapData = leafletMapService.getBaseMapData();
+		var mapData  = leafletMapService.getBaseMapData();
 
 		if ( !len( mapData.accessToken ) ) {
 			return translateResource( "formcontrols.mapPicker:required.access.token" );
 		}
-		args.lookupPageSize = args.lookupPageSize ?: 15;
-		args.searchType     = len( mapData.geocodeApiKey ) && ( ( args.searchType ?: "address" ) == "address" ) ? "address" : "postcode";
-		mapData.errors      = {
+
+		args.buttonClass       = args.buttonClass       ?: mapPickerDefaults.buttonClass;
+		args.searchButtonClass = args.searchButtonClass ?: mapPickerDefaults.searchButtonClass;
+		args.centreButtonClass = args.centreButtonClass ?: mapPickerDefaults.centreButtonClass;
+		args.resetButtonClass  = args.resetButtonClass  ?: mapPickerDefaults.resetButtonClass;
+		args.searchInputClass  = args.searchInputClass  ?: mapPickerDefaults.searchInputClass;
+		args.resultSelectClass = args.resultSelectClass ?: mapPickerDefaults.resultSelectClass;
+
+		args.searchType        = len( mapData.geocodeApiKey ) && ( ( args.searchType ?: "address" ) == "address" ) ? "address" : "postcode";
+
+		mapData.lookupPageSize = mapPickerDefaults.lookupPageSize;
+		mapData.errors         = {
 			postcode = {
 				  title       = translateResource( "formcontrols.mapPicker:postcode.error.title" )
 				, notSupplied = translateResource( "formcontrols.mapPicker:postcode.error.not.supplied" )

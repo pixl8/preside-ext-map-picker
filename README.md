@@ -61,6 +61,8 @@ Finally, **Reset marker** will restore the map and its linked fields to the stat
 
 Configuring the front-end map picker control is slightly different from the admin control. The control returns a comma-separated `lat,lng` value, and can be implemented with no dependency on other form fields. If persisting to a Preside object, a `varchar( 30 )` property is recommended.
 
+Frontend forms should be rendered in the `website` context.
+
 *Note that the front-end map picker depends on jQuery being available on the page*
 
 ```
@@ -83,7 +85,7 @@ There are a number of attributes that can be used to customise the map picker:
 - `searchFields`: empty by default. If empty, the picker will include its own search input field. But if set to the name (or comma-separated list of names) of another field within the form, then that/those fields will be used to do the location search (so the user does not need to enter data twice).
 - `buttonClass`: class to be applied to all buttons on the picker
 - `searchButtonClass`, `centreButtonClass`, `resetButtonClass`: class to be applied to specific buttons
-- `searchInputClass`: class to be applied to the picker's search input field
+- `searchInputClass`, `resultSelectClass`: class to be applied to the picker's search input and multiple result select fields
 
 An example of `searchFields`, which will concatenate the contents of the listed fields and send them to the geocoding service:
 
@@ -96,4 +98,19 @@ An example of `searchFields`, which will concatenate the contents of the listed 
 		</fieldset>
 	</tab>
 </form>
+```
+
+#### Global defaults
+
+The following settings may also be defined globally in `Config.cfc` and will be used unless overridden on a specific form field definition:
+
+```
+settings.mapPicker.defaults = {
+	  buttonClass       = ""
+	, searchButtonClass = ""
+	, centreButtonClass = ""
+	, resetButtonClass  = ""
+	, searchInputClass  = ""
+	, resultSelectClass = ""
+};
 ```

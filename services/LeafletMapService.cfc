@@ -20,9 +20,9 @@ component {
 			, defaultLatitude  = isNumeric( leafletConfig.defaultLatitude  ?: "" ) ? leafletConfig.defaultLatitude    : 54.003
 			, defaultLongitude = isNumeric( leafletConfig.defaultLongitude ?: "" ) ? leafletConfig.defaultLongitude   : -2.547
 			, defaultZoom      = isNumeric( leafletConfig.defaultZoom      ?: "" ) ? int( leafletConfig.defaultZoom ) : 5
-			, zoom             = isNumeric( leafletConfig.initialZoom      ?: "" ) ? int( leafletConfig.initialZoom ) : 14
-			, maxZoom          = isNumeric( leafletConfig.maxZoom          ?: "" ) ? int( leafletConfig.maxZoom )     : 18
-			, lookupPageSize   = 15
+			, zoom             = isNumeric( leafletConfig.initialZoom      ?: "" ) ? int( leafletConfig.initialZoom ) : 13
+			, maxZoom          = isNumeric( leafletConfig.maxZoom          ?: "" ) ? int( leafletConfig.maxZoom )     : 20
+			, addressesFound   = $translateResource( "formcontrols.mapPicker:addresses.found" )
 			, zoomToFit        = false
 			, markers          = []
 		};
