@@ -13,7 +13,6 @@ component {
 			, resetButtonClass  = ""
 			, searchInputClass  = ""
 			, resultSelectClass = ""
-			, lookupPageSize    = 10
 		};
 	}
 
