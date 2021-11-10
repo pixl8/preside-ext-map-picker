@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.2
+
+* Explicitly set styling for layer selectors
+
 ## v1.1.1
 
 * MAPPICKER-2 Set z-index on container to establish stacking context
