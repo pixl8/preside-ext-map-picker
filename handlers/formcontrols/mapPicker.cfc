@@ -62,8 +62,11 @@ component {
 			}
 		};
 
+		if ( args.searchType == "address" ) {
+			event.includeUrl( url="https://maps.googleapis.com/maps/api/js?key=#mapData.googleApiKey#&libraries=places", type="js" );
+		}
+
 		event.includeData( { mapData=mapData } )
-			.includeUrl( url="https://maps.googleapis.com/maps/api/js?key=#mapData.googleApiKey#&libraries=places", type="js" )
 			.include( "/js/frontend/mapPicker/" )
 			.include( "/css/frontend/mapPicker/" );
 
