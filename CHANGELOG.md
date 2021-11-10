@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.1
+
+* MAPPICKER-2 Set z-index on container to establish stacking context
+
 ## v1.1.0
 
 * MAPPICKER-1 Add frontend mappicker form control (inc. full address geocoding)
