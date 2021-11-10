@@ -8,17 +8,17 @@
 </cfscript>
 
 <cfoutput>
-	<div class="leaflet-map-picker">
-		<div class="leaflet-map-picker-map"
+	<div class="admin-map-picker">
+		<div class="admin-map-picker-map"
 			id="#inputId#"
-			postcodeField="#postcodeField#"
-			latitudeField="#latitudeField#"
-			longitudeField="#longitudeField#"
-			zoomField="#zoomField#"
+			data-postcode-field="#postcodeField#"
+			data-latitude-field="#latitudeField#"
+			data-longitude-field="#longitudeField#"
+			data-zoom-field="#zoomField#"
 			style="height:500px;"
 		></div>
 
-		<div class="leaflet-map-picker-buttons" style="text-align:right;margin-top:4px;">
+		<div class="admin-map-picker-buttons" style="text-align:right;margin-top:4px;">
 			<cfif len( postcodeField )>
 				<button type="button" class="btn btn-info marker-set-at-postcode">
 					<i class="fa fa-fw fa-location-arrow"></i>

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.0
+
+* MAPPICKER-1 Add frontend mappicker form control (inc. full address geocoding)
+
 ## v1.0.6
 
 * Re-publish
