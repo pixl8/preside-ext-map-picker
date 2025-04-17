@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.4
+
+* Invalid name selector on postcode field (caused by jQuery upgrade)
+
 ## v1.1.3
 
 * Update build version generator
