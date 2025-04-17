@@ -11,10 +11,18 @@
 	<div class="admin-map-picker">
 		<div class="admin-map-picker-map"
 			id="#inputId#"
-			data-postcode-field="#postcodeField#"
-			data-latitude-field="#latitudeField#"
-			data-longitude-field="#longitudeField#"
-			data-zoom-field="#zoomField#"
+			<cfif Len( postcodeField )>
+				data-postcode-field="#postcodeField#"
+			</cfif>
+			<cfif Len( latitudeField )>
+				data-latitude-field="#latitudeField#"
+			</cfif>
+			<cfif Len( longitudeField )>
+				data-longitude-field="#longitudeField#"
+			</cfif>
+			<cfif Len( zoomField )>
+				data-zoom-field="#zoomField#"
+			</cfif>
 			style="height:500px;"
 		></div>
 
